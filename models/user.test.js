@@ -16,7 +16,7 @@ const {
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
-//afterEach(commonAfterEach);
+afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
 /************************************** authenticate */
