@@ -6,12 +6,14 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../expressError");
 
-/** Middleware: Authenticate user.
+/**
+ * Middleware: Authenticate user.
  *
- * If a token was provided, verify it, and, if valid, store the token payload
- * on res.locals (this will include the username and isAdmin field.)
+ * If a token was provided, it verifies the token's validity.
+ * If the token is valid, it stores the token payload, including the username and isAdmin field,
+ * on `res.locals`.
  *
- * It's not an error if no token was provided or if the token is not valid.
+ * It is not considered an error if no token was provided or if the token is not valid.
  */
 
 function authenticateJWT(req, res, next) {
@@ -27,9 +29,10 @@ function authenticateJWT(req, res, next) {
   }
 }
 
-/** Middleware to use when they must be logged in.
+/**
+ * Middleware to use when a user must be logged in.
  *
- * If not, raises Unauthorized.
+ * If the user is not logged in, it raises an UnauthorizedError.
  */
 
 function ensureLoggedIn(req, res, next) {
@@ -41,9 +44,10 @@ function ensureLoggedIn(req, res, next) {
   }
 }
 
-/** Middleware to use when they be logged in as an admin user.
+/**
+ * Middleware to use when a user must be logged in as an admin user.
  *
- *  If not, raises Unauthorized.
+ * If the user is not logged in as an admin, it raises an UnauthorizedError.
  */
 
 function ensureAdmin(req, res, next) {
@@ -57,10 +61,12 @@ function ensureAdmin(req, res, next) {
   }
 }
 
-/** Middleware to use when they must provide a valid token & be user matching
- *  username provided as route param.
+/**
+ * Middleware to use when a user must provide a valid token and be the user matching
+ * the username provided as a route parameter.
  *
- *  If not, raises Unauthorized.
+ * If the user is not logged in or does not have admin privileges or does not match
+ * the provided username, it raises an UnauthorizedError.
  */
 
 function ensureCorrectUserOrAdmin(req, res, next) {

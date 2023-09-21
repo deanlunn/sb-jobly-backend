@@ -1,10 +1,12 @@
 const { BadRequestError } = require("../expressError");
 
 /**
- * Helper that generates the SET clause and corresponding values for an update SQL statement.
- * @param {object} dataToUpdate - The data object containing the columns to update and their new values.
- * @param {object} jsToSql - The mapping object to convert JavaScript property names to SQL column names (optional).
- * @returns {object} An object with setCols and values properties.
+ * Generates an SQL query for a partial update operation
+ * @param {object} dataToUpdate - An object containing the data to update.
+ * @param {object} jsToSql - An object mapping Javascript object property names to their corresponding column names in the database.
+ * @returns {object} An object with two properties setCols and values.
+ *                   `setCols` represents the "SET" part of the update query.
+ *                   `values` contains the values to be used in the update query.
  * @throws {BadRequestError} Throws an error if the dataToUpdate object is empty.
  */
 
